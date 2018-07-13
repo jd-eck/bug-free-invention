@@ -4,7 +4,7 @@ connection: "redshift_test"
 include: "*.view"
 
 # include all the dashboards
-include: "*.dashboard"
+# include: "*.dashboard"
 
 datagroup: git_test_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
@@ -15,10 +15,11 @@ persist_with: git_test_default_datagroup
 
 explore: all_types {}
 
-explore: order_items {
+explore: order_test1 {
+  from: order_items
   join: orders {
     type: left_outer
-    sql_on: ${order_items.order_id} = ${orders.id} ;;
+    sql_on: ${order_test1.order_id} = ${orders.id} ;;
     relationship: many_to_one
   }
 
